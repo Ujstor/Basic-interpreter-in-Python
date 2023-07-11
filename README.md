@@ -5,4 +5,4 @@ This project provides a basic interpreter implemented in Python with the goal of
 
 ![purple-divider](https://user-images.githubusercontent.com/7065401/52071927-c1cd7100-2562-11e9-908a-dde91ba14e59.png)
 
-[Create a Programming Language and Learn Advanced Python](https://www.youtube.com)1
+[Create a Programming Language and Learn Advanced Python](https://www.youtube.com/watch?v=1WpKsY9LBlY)
