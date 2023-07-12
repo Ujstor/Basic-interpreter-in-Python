@@ -10,3 +10,4 @@ This project provides a basic interpreter implemented in Python with the goal of
 2. [Data Structures Easy to Advanced Course - Full Tutorial from a Google Engineer](https://www.youtube.com/watch?v=RBSGKlAvoiM&list=PLkNZMXPAMnwPWawqMHs5Y2Q5B3Sh5Iwbo&index=22&t=14388s)
 3. [Data Structures - Computer Science Course for Beginners](https://www.youtube.com/watch?v=zg9ih6SVACc&list=PLkNZMXPAMnwPWawqMHs5Y2Q5B3Sh5Iwbo&index=3&t=115s)
 4. [Recursion in Programming](https://www.youtube.com/watch?v=IJDJ0kBx2LM&t=12s)
+5. [Big O Notation](https://www.youtube.com/watch?v=Mo4vesaut8g)
