@@ -2,7 +2,7 @@ from tokens import Integer, Float, Operations
 
 class Lexer:
     digits = "0123456789"
-    operations = "+-/*"
+    operations = "+-/*()"
     stopwords = [" "]
 
 
