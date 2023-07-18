@@ -2,14 +2,18 @@ from tokens import Integer, Float
 
 
 class Interpreter:
-    def __init__ (self, tree):
+    def __init__ (self, tree, base):
         self.tree = tree
+        self.data = base
 
     def read_INT(self, value):
         return int(value)
 
     def read_FLT(self, value):
         return float(value)
+
+    #1) make a = 5
+    #2) make b = a + 1
 
     def compute_bin(self, left, op, right):
         left_type = left.type
