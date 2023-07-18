@@ -12,12 +12,25 @@ class Interpreter:
     def read_FLT(self, value):
         return float(value)
 
+    def read_VAR(self, id):
+        variable = self.data.read(id)
+        variable_type = variable.type
+
+        return getattr(self, f'read_{variable_type}')(variable.value)
+
     #1) make a = 5
     #2) make b = a + 1
+    #[b, =, [a, +, 1]]
 
     def compute_bin(self, left, op, right):
-        left_type = left.type
-        right_type = right.type
+        left_type = "VAR" if str(left.type).startswith("VAR") else str(left.type)
+        right_type = "VAR" if str(right.type).startswith("VAR") else str(right.type)
+
+        if op.value == '=':
+            #1) make a = 5
+            left_type = f"VAR({right_type})"
+            self.data.write(left, right)
+            return self.data.read_all()
 
         left =  getattr(self, f'read_{left_type}')(left.value)
         right = getattr(self, f'read_{right_type}')(right.value)
