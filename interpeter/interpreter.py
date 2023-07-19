@@ -46,22 +46,40 @@ class Interpreter:
 
         return Integer(output) if (left_type == 'INT' and right_type == 'INT') else Float(output)
 
+    def compute_unary(self, operator, operand):
+        operand_type = "VAR" if str(operand.type).startswith('VAR') else str(operand.type)
+        operand =  getattr(self, f'read_{operand_type}')(operand.value)
+
+        if operator.value == '+':
+            return +operand
+        elif operator.value == '-':
+            return -operand
+
     def interpret(self, tree=None):
         if tree is None:
             tree = self.tree
-        #   A
-        #  / \
-        # B   C
-        #[1, +, 1]
-        #[[1, +, 2], +, 3]] ---> 1 + 2 + 3
-        left_node = tree[0] # evaluate left subtree
-        if isinstance(left_node, list):
-            left_node = self.interpret(left_node)
+        # Unary operation
+        if isinstance(tree, list) and len(tree) == 2:
+            return self.compute_unary(tree[0], tree[1])
+        # no operation
+        elif not isinstance(tree, list):
+            return tree
 
-        right_node = tree[2] # evaluate right subtree
-        if isinstance(right_node, list):
-            right_node = self.interpret(right_node)
+        else:
 
-        operator = tree[1] # Root node
+            #   A
+            #  / \
+            # B   C
+            #[1, +, 1]
+            #[[1, +, 2], +, 3]] ---> 1 + 2 + 3
+            left_node = tree[0] # evaluate left subtree
+            if isinstance(left_node, list):
+                left_node = self.interpret(left_node)
 
-        return self.compute_bin(left_node, operator, right_node)
+            right_node = tree[2] # evaluate right subtree
+            if isinstance(right_node, list):
+                right_node = self.interpret(right_node)
+
+            operator = tree[1] # Root node
+
+            return self.compute_bin(left_node, operator, right_node)

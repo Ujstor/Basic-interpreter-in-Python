@@ -6,17 +6,17 @@ from data import Data
 base = Data()
 
 while True:
-    text = input("ShadowScript> ")
+    text = input("ShadowScript: ")
 
     tokenizer = Lexer(text)
     tokens = tokenizer.tokenize()
-
     print(tokens)
 
     parser = Parser(tokens)
     tree = parser.parse()
     print(tree)
+
     interpreter = Interpreter(tree, base)
     result = interpreter.interpret()
-
-    print(result)
+    if result is not None:
+        print(result)

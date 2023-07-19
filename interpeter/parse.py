@@ -9,14 +9,23 @@ class Parser:
     def factor(self):
         if self.token.type == 'INT' or self.token.type == 'FLT':
             return self.token
+
         # <factor> ::=  ( <expression> )
         elif self.token.value == '(':
             self.move()
             expression = self.expression()
             return expression
+
         # <factor> ::=  <variable>
         elif self.token.type.startswith('VAR'):
             return self.token
+
+        elif self.token.value == '+' or self.token.value == '-':
+            operator = self.token
+            self.move()
+            operand = self.expression()
+
+            return [operator, operand]
 
     def term(self):
         # 1 * 2 ---> [1, *, 2] term
