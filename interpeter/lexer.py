@@ -1,12 +1,18 @@
-from tokens import Integer, Float, Operations, Declaration, Variable
+from tokens import Integer, Float, Operation, Declaration, Variable, Boolean, Comparison, Reserved
+
+# make varname = 50
 
 class Lexer:
+    # while <expr> do <statement>
     digits = "0123456789"
     letters = "abcdefghijklmnopqrstuvwxyz"
     operations = "+-/*()="
     stopwords = [" "]
-    declartions = ["make"]
-
+    declarations = ["make"]
+    boolean = ["and", "or", "not"]
+    comparisons = [">", "<", ">=", "<=", "?="]
+    specialCharacters = "><=?"
+    reserved = ["if", "elif", "else", "do", "while"]
 
     def __init__(self, text):
         self.text = text
@@ -21,7 +27,7 @@ class Lexer:
                 self.token = self.extract_number()
 
             elif self.char in Lexer.operations:
-                self.token = Operations(self.char)
+                self.token = Operation(self.char)
                 self.move()
 
             elif self.char in Lexer.stopwords:
@@ -30,15 +36,27 @@ class Lexer:
 
             elif self.char in Lexer.letters:
                 word = self.extract_word()
-                if word in Lexer.declartions:
+
+                if word in Lexer.declarations:
                     self.token = Declaration(word)
+                elif word in Lexer.boolean:
+                    self.token = Boolean(word)
+                elif word in Lexer.reserved:
+                    self.token = Reserved(word)
                 else:
                     self.token = Variable(word)
+
+            elif self.char in Lexer.specialCharacters:
+                comparisonOperator = ""
+                while self.char in Lexer.specialCharacters and self.idx < len(self.text):
+                    comparisonOperator += self.char
+                    self.move()
+
+                self.token = Comparison(comparisonOperator)
 
             self.tokens.append(self.token)
 
         return self.tokens
-
 
     def extract_number(self):
         number = ""
