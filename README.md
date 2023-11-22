@@ -2,6 +2,12 @@
 
 This project provides a basic interpreter implemented in Python with the goal of facilitating learning in the field of computer science, including the inner workings of computers, and advancing Python programming skills. The interpreter covers various fundamental concepts, such as logic gates, computer arithmetic, computer memory, programming principles, lexical analysis, parsing, object-oriented programming, data structures, and more.
 
+## Try Interpreter in VM
+
+A link to test this code in a VM environment is provided in the description of this repository.
+
+![](https://i.imgur.com/JTl6nAx.png)
+
 
 ![purple-divider](https://user-images.githubusercontent.com/7065401/52071927-c1cd7100-2562-11e9-908a-dde91ba14e59.png)
 
