@@ -10,13 +10,14 @@ while True:
 
     tokenizer = Lexer(text)
     tokens = tokenizer.tokenize()
-   # print(tokens)
+    print(tokenizer)
 
     parser = Parser(tokens)
     tree = parser.parse()
-    #print(tree)
+    print(tree)
 
     interpreter = Interpreter(tree, base)
+    print(interpreter)
     result = interpreter.interpret()
-    if result is not None:
-        print(result)
+  
+    print(result)

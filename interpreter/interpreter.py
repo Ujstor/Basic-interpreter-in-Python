@@ -7,10 +7,10 @@ class Interpreter:
 
     def read_INT(self, value):
         return int(value)
-
+    
     def read_FLT(self, value):
         return float(value)
-
+    
     def read_VAR(self, id):
         variable = self.data.read(id)
         variable_type = variable.type
@@ -52,6 +52,7 @@ class Interpreter:
             output = 1 if left or right else 0
 
         return Integer(output) if (left_type == "INT" and right_type == "INT") else Float(output)
+        
 
 
     def compute_unary(self, operator, operand):
@@ -65,7 +66,7 @@ class Interpreter:
             output = -operand
         elif operator.value == "not":
             output = 1 if not operand else 0
-
+        
         return Integer(output) if (operand_type == "INT") else Float(output)
 
     def interpret(self, tree=None):
@@ -79,35 +80,39 @@ class Interpreter:
                         evaluation = self.interpret(condition)
                         if evaluation.value == 1:
                             return self.interpret(tree[1][1][idx])
-
+                    
                     if len(tree[1]) == 3:
                         return self.interpret(tree[1][2])
-
+                    
                     else:
                         return
                 elif tree[0].value == "while":
                     condition = self.interpret(tree[1][0])
-
+                    
                     while condition.value == 1:
                         # Doing the action
                         print(self.interpret(tree[1][1]))
 
                         # Checking the condition
-                        condition = self.interpret(tree[1][0])
 
+                        condition = self.interpret(tree[1][0])
+                        result = self.interpret(tree[1][0])
+                        print(result)
+
+                    
                     return
 
-        # Unary operation
+        # Unary operation            
         if isinstance(tree, list) and len(tree) == 2:
             expression = tree[1]
             if isinstance(expression, list):
                 expression = self.interpret(expression)
             return self.compute_unary(tree[0], expression)
-
+        
         # No operation
         elif not isinstance(tree, list):
             return tree
-
+        
         else:
             # Post order traversal
 
@@ -123,4 +128,5 @@ class Interpreter:
 
             # Evaluating root node
             operator = tree[1]
+            
             return self.compute_bin(left_node, operator, right_node)
